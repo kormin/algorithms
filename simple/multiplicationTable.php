@@ -87,12 +87,12 @@ $out = 'output';
 		<script src="<?=TWBS_JS;?>"></script>
 		<script type="text/javascript">
 			// variables
-			var col, row, colid, rowid;
+			var col, row, colid, rowid, target;
 			window.onload = function() {
 				$(document).ready(main());
 			}
 			function main() {
-				var target = document.getElementById('<?=$out;?>');
+				target = document.getElementById('<?=$out;?>');
 				// var stat = false;
 				// var id = setTimeout(function() {
 				// 	// var stat = setVal();
@@ -100,19 +100,28 @@ $out = 'output';
 				// }, 1000);
 				colid = document.getElementById('<?=$input[0];?>');
 				rowid = document.getElementById('<?=$input[3];?>');
-				colid.onkeyup = function(){
-					if(this.value>0) {
-						col = this.value;
- 						console.log(this.value);
-						rowid.onkeyup = function(){
-							if(this.value>0) {
-								row = this.value;
-								console.log(this.value);
-								makeTable(target);
-							}
-						};
-					}
-				};
+				// colid.onkeyup = function(){
+				// 	if(this.value>0) {
+				// 		col = this.value;
+ 				// 		console.log(this.value);
+				// 		rowid.onkeyup = function(){
+				// 			if(this.value>0) {
+				// 				row = this.value;
+				// 				console.log(this.value);
+				// 				makeTable(target);
+				// 			}
+				// 		};
+				// 	}
+				// };
+				colid.onkeyup = function(){colkey()};
+				rowid.onkeyup = function(){colkey()};
+			}
+			function colkey() {
+				col = colid.value;
+				row = rowid.value;
+				if (col>0 && row>0) {
+					makeTable(target);
+				}
 			}
 			function setVal() {
 				col = colid.value;
